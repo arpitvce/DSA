@@ -1,21 +1,18 @@
 class Solution:
     def reverseBetween(self, head: Optional[ListNode], left: int, right: int) -> Optional[ListNode]:
-        dummy=ListNode(-1)
-        dummy.next=head
-        start=dummy.next
+       dummy=ListNode(-1)
+       dummy.next=head
+       leftnode=head
         for _ in range(1,left):
-            start=start.next
-        end=dummy.next
-        temp=dummy.next
-        temp=start.next
+            leftnode=leftnode.next
+        rightnode=head
         for _ in range(1,right):
-            end=end.next
-        curr=start
-        start.next=end.next
-        nxt=None
-        while (nxt!=end):
-            nxt=temp.next
-            temp.next=curr
-            curr=temp
-            temp=nxt
+            rightnode=rightnode.next
+        temp=leftnode
+        temp=temp.next
+        leftnode.next=rightnode.next
+        while temp!=rightnode:
+            leftnode.next=temp
+            temp=temp.next
+            leftnode=leftnode.next
         return dummy.next
